@@ -30,7 +30,7 @@
 				"slider": true,
 				"arrows": true,
 				"big-arrows": true,
-				"arrow-step": 1,
+				"arrow-step": 2,
 				"big-arrow-step": 5,
 				"slider-step": 1
 			}
@@ -39,7 +39,7 @@
 			"name": "Stack Size Scale",
 			"description": "Adjust the scale of the stack size text.",
 			"type": "float",
-			"default": 0.1,
+			"default": 0.5,
 			"min": 0.01,
 			"max": 1.00,
 			"control": {
@@ -53,10 +53,10 @@
 			}
 		},
 		"padding": {
-			"name": "Stack Size Padding",
+			"name": "Stack Size Positioning Padding",
 			"description": "Adjust the amount of padding for positioning the stack size text.",
 			"type": "float",
-			"default": 4.5,
+			"default": 7.75,
 			"min": 0.00,
 			"max": 10.0,
 			"control": {
@@ -68,6 +68,12 @@
 				"big-arrow-step": 5,
 				"slider-step": 0.01
 			}
+		},
+		"color": {
+			"name": "Stack Size Color + Opacity",
+			"description": "Adjust the color/opacity of the stack size text.",
+			"type": "rgba",
+			"default": [220, 220, 220, 255]
 		}
 	}
 }

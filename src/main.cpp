@@ -18,8 +18,12 @@ class $modify(MyEditorUI, EditorUI) {
 	double getDouble(std::string_view key) {
 		return m_fields->mod->getSettingValue<double>(key);
 	}
+	cocos2d::ccColor4B getColor(std::string_view key) {
+		return m_fields->mod->getSettingValue<cocos2d::ccColor4B>(key);
+	}
 	CreateMenuItem* getCreateBtn(int id, int bg) {
 		auto result = EditorUI::getCreateBtn(id, bg);
+		if (!getBool("enabled")) return result;
 		ButtonSprite* buttonSprite = nullptr;
 		for (auto node : CCArrayExt<CCNode*>(result->getChildren())) {
 			if (auto bs = typeinfo_cast<ButtonSprite*>(node)) {
@@ -51,6 +55,9 @@ class $modify(MyEditorUI, EditorUI) {
 		auto label = CCLabelBMFont::create(objectIDAsCString.c_str(), fontFile.c_str(), 10.f, kCCTextAlignmentRight);
 		auto nodeID = fmt::format("{}/objectID-{}-stacksize", m_fields->mod->getID(), id);
 		label->setAnchorPoint({1.f, 0.f});
+		auto color = getColor("color");
+		label->setColor({color.r, color.g, color.b});
+		label->setOpacity(color.a);
 		label->setScale(static_cast<float>(getDouble("scale")));
 		label->setPosition(
 			{
@@ -65,39 +72,3 @@ class $modify(MyEditorUI, EditorUI) {
 		return result;
 	}
 };
-
-/*
-#include <Geode/modify/CreateMenuItem.hpp>
-class $modify(MyCreateMenuItem, CreateMenuItem) {
-	static void onModify(auto& self) {
-		(void) self.setHookPriority("CreateMenuItem::create", -2123456789);
-	}
-	static CreateMenuItem* create(cocos2d::CCNode* p0, cocos2d::CCNode* p1, cocos2d::CCObject* p2, cocos2d::SEL_MenuHandler p3) {
-		auto result = CreateMenuItem::create(p0, p1, p2, p3);
-		auto buttonSprite = getChildOfType<ButtonSprite>(result, 1);
-		if (!buttonSprite) return result;
-		auto gameObject = getChildOfType<GameObject>(buttonSprite, 1);
-		if (!gameObject) return result;
-		int objectID = gameObject->m_objectID;
-		auto label = CCLabelBMFont::create();
-		auto objectIDAsCString = fmt::format("{}", objectID);
-		label->setString(objectIDAsCString.c_str());
-		std::string fontFile = "bigFont.fnt";
-		int font = Mod::get()->getSettingValue<int64_t>("stackSizeFont");
-		if (font == 0) {
-			fontFile = "bigFont.fnt";
-		} else if (font == -1) {
-			fontFile = "goldFont.fnt";
-		} else if (font == -2) {
-			fontFile = "chatFont.fnt";
-		} else if (font > 0) {
-			fontFile = fmt::format("gjFont{:02d}.fnt", font);
-		}
-		label->setFntFile(fontFile.c_str());
-		label->setAlignment(kCCTextAlignmentRight);
-		buttonSprite->addChild(label);
-		buttonSprite->updateLayout();
-		return result;
-	}
-};
-*/
