@@ -23,7 +23,7 @@ class $modify(MyEditorUI, EditorUI) {
 	}
 	CreateMenuItem* getCreateBtn(int id, int bg) {
 		auto result = EditorUI::getCreateBtn(id, bg);
-		if (!getBool("enabled")) return result;
+		if (!MyEditorUI::getBool("enabled")) return result;
 		ButtonSprite* buttonSprite = nullptr;
 		for (auto node : CCArrayExt<CCNode*>(result->getChildren())) {
 			if (auto bs = typeinfo_cast<ButtonSprite*>(node)) {
@@ -41,7 +41,7 @@ class $modify(MyEditorUI, EditorUI) {
 		}
 		if (!gameObject) return result;
 		std::string fontFile = "bigFont.fnt";
-		int font = getInt("stackSizeFont");
+		int font = MyEditorUI::getInt("stackSizeFont");
 		if (font == 0) {
 			fontFile = "bigFont.fnt";
 		} else if (font == -1) {
@@ -54,19 +54,20 @@ class $modify(MyEditorUI, EditorUI) {
 		auto objectIDAsCString = fmt::format("{}", id);
 		auto label = CCLabelBMFont::create(objectIDAsCString.c_str(), fontFile.c_str(), 10.f, kCCTextAlignmentRight);
 		auto nodeID = fmt::format("{}/objectID-{}-stacksize", m_fields->mod->getID(), id);
+		auto color = MyEditorUI::getColor("color");
+		auto padding = static_cast<float>(MyEditorUI::getDouble("padding"));
+		if (MyEditorUI::getBool("readableMode")) label->setBlendFunc({GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA});
 		label->setAnchorPoint({1.f, 0.f});
-		auto color = getColor("color");
 		label->setColor({color.r, color.g, color.b});
 		label->setOpacity(color.a);
 		label->setScale(static_cast<float>(getDouble("scale")));
 		label->setPosition(
 			{
-				buttonSprite->getPositionX() + buttonSprite->getContentWidth() / 2.f - static_cast<float>(getDouble("padding")),
-				buttonSprite->getPositionY() - buttonSprite->getContentHeight() / 2.f + static_cast<float>(getDouble("padding"))
+				buttonSprite->getPositionX() + buttonSprite->getContentWidth() / 2.f - padding,
+				buttonSprite->getPositionY() - buttonSprite->getContentHeight() / 2.f + padding
 			}
 		);
 		label->setZOrder(gameObject->getZOrder() + 2);
-		if (getBool("readableMode")) label->setBlendFunc({GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA});
 		label->setID(nodeID);
 		buttonSprite->addChild(label);
 		buttonSprite->updateLayout();
