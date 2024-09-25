@@ -6,8 +6,8 @@
 		"android": "2.206"
 	},
 	"id": "raydeeux.gameobjectidstacksize",
-	"name": "GameObjectIDStackSize",
-	"version": "v1.0.0",
+	"name": "GameObjectIDDisplay",
+	"version": "v1.0.1",
 	"developer": "RayDeeUx",
 	"description": "Show an object's ID in its lower right corner.",
 	"repository": "https://github.com/RayDeeUx/GameObjectIDStackSize",

@@ -40,6 +40,7 @@ class $modify(MyEditorUI, EditorUI) {
 			}
 		}
 		if (!gameObject) return result;
+		if (gameObject->m_objectID != id) return result;
 		std::string fontFile = "bigFont.fnt";
 		int font = MyEditorUI::getInt("stackSizeFont");
 		if (font == 0) {
