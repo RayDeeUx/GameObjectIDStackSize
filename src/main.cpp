@@ -66,6 +66,7 @@ class $modify(MyEditorUI, EditorUI) {
 			}
 		);
 		label->setZOrder(gameObject->getZOrder() + 2);
+		if (getBool("readableMode")) label->setBlendFunc({GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA});
 		label->setID(nodeID);
 		buttonSprite->addChild(label);
 		buttonSprite->updateLayout();

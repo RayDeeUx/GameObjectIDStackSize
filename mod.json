@@ -18,6 +18,12 @@
 			"type": "bool",
 			"default": true
 		},
+		"readableMode": {
+			"name": "Readable Mode (Stronger Blending)",
+			"description": "Make the info label easier to read across a far larger variety of scenarios.\n\n<cy>For best results, make sure the opacity setting</c> <cl>(seen in \"Stack Size Color + Opacity\")</c> <cy>is set to</c> <cl>1.00</c><cy>!</c>",
+			"type": "bool",
+			"default": true
+		},
 		"stackSizeFont": {
 			"name": "Stack Size Font",
 			"description": "Choose the font for the stack size text.\n\n<cj>0 for Pusab, -1 for Golden Pusab, and -2 for the font you see when viewing level comments.</c>\n<cy>To use font numbers greater than 0: refer to the level editor for the font each number corresponds to, subtract that number by 1, and then put it here.</c>",
