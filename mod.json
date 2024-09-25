@@ -1,0 +1,73 @@
+{
+	"geode": "3.4.0",
+	"gd": {
+		"win": "2.206",
+		"mac": "2.206",
+		"android": "2.206"
+	},
+	"id": "raydeeux.gameobjectidstacksize",
+	"name": "GameObjectIDStackSize",
+	"version": "v1.0.0",
+	"developer": "RayDeeUx",
+	"description": "Show an object's ID in its lower right corner.",
+	"repository": "https://github.com/RayDeeUx/GameObjectIDStackSize",
+	"settings": {
+		"enabled": {
+			"name": "Enabled",
+			"description": "Toggles the mod.\n\n<cy>To hide the \"notification\"</c> <cr>everywhere</c><cy>, disable this setting.</c>",
+			"type": "bool",
+			"default": true
+		},
+		"stackSizeFont": {
+			"name": "Stack Size Font",
+			"description": "Choose the font for the stack size text.\n\n<cj>0 for Pusab, -1 for Golden Pusab, and -2 for the font you see when viewing level comments.</c>\n<cy>To use font numbers greater than 0: refer to the level editor for the font each number corresponds to, subtract that number by 1, and then put it here.</c>",
+			"type": "int",
+			"default": -2,
+			"min": -2,
+			"max": 59,
+			"control": {
+				"input": true,
+				"slider": true,
+				"arrows": true,
+				"big-arrows": true,
+				"arrow-step": 1,
+				"big-arrow-step": 5,
+				"slider-step": 1
+			}
+		},
+		"scale": {
+			"name": "Stack Size Scale",
+			"description": "Adjust the scale of the stack size text.",
+			"type": "float",
+			"default": 0.1,
+			"min": 0.01,
+			"max": 1.00,
+			"control": {
+				"input": true,
+				"slider": true,
+				"arrows": false,
+				"big-arrows": false,
+				"arrow-step": 0,
+				"big-arrow-step": 0,
+				"slider-step": 0.01
+			}
+		},
+		"padding": {
+			"name": "Stack Size Padding",
+			"description": "Adjust the amount of padding for positioning the stack size text.",
+			"type": "float",
+			"default": 4.5,
+			"min": 0.00,
+			"max": 10.0,
+			"control": {
+				"input": true,
+				"slider": true,
+				"arrows": true,
+				"big-arrows": true,
+				"arrow-step": 1,
+				"big-arrow-step": 5,
+				"slider-step": 0.01
+			}
+		}
+	}
+}
