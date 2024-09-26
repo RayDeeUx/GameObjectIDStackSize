@@ -7,14 +7,14 @@
 	},
 	"id": "raydeeux.gameobjectidstacksize",
 	"name": "GameObjectIDDisplay",
-	"version": "v1.0.1",
+	"version": "v1.0.2",
 	"developer": "RayDeeUx",
 	"description": "Show an object's ID in its lower right corner.",
 	"repository": "https://github.com/RayDeeUx/GameObjectIDStackSize",
 	"settings": {
 		"enabled": {
 			"name": "Enabled",
-			"description": "Toggles the mod.\n\n<cy>To hide the \"notification\"</c> <cr>everywhere</c><cy>, disable this setting.</c>",
+			"description": "Toggles the mod.",
 			"type": "bool",
 			"default": true
 		},
