@@ -1,4 +1,4 @@
-# GameObjectIDDisplay
+# ObjectIDDisplay
 
 Show an object's ID in its lower right corner, like stack sizes in Minecraft.
 

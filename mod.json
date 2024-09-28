@@ -6,7 +6,7 @@
 		"android": "2.206"
 	},
 	"id": "raydeeux.gameobjectidstacksize",
-	"name": "GameObjectIDDisplay",
+	"name": "ObjectIDDisplay",
 	"version": "v1.0.2",
 	"developer": "RayDeeUx",
 	"description": "Show an object's ID in its lower right corner.",
