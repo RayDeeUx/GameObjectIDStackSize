@@ -1,13 +1,13 @@
 {
-	"geode": "3.4.0",
+	"geode": "4.0.0-alpha.1",
 	"gd": {
-		"win": "2.206",
-		"mac": "2.206",
-		"android": "2.206"
+		"win": "2.2074",
+		"mac": "2.2074",
+		"android": "2.2074"
 	},
 	"id": "raydeeux.gameobjectidstacksize",
 	"name": "ObjectIDDisplay",
-	"version": "v1.0.2",
+	"version": "v1.0.3",
 	"developer": "RayDeeUx",
 	"description": "Show an object's ID in its lower right corner.",
 	"repository": "https://github.com/RayDeeUx/GameObjectIDStackSize",
