@@ -24,23 +24,24 @@ class $modify(MyEditorUI, EditorUI) {
 	CreateMenuItem* getCreateBtn(int id, int bg) {
 		auto result = EditorUI::getCreateBtn(id, bg);
 		if (!MyEditorUI::getBool("enabled")) return result;
-		ButtonSprite* buttonSprite = nullptr;
-		for (auto node : CCArrayExt<CCNode*>(result->getChildren())) {
-			if (auto bs = typeinfo_cast<ButtonSprite*>(node)) {
-				buttonSprite = bs;
-				break;
+		if (MyEditorUI::getBool("extraSafety")) {
+			ButtonSprite* buttonSprite = nullptr;
+			for (auto node : CCArrayExt<CCNode*>(result->getChildren())) {
+				if (auto bs = typeinfo_cast<ButtonSprite*>(node)) {
+					buttonSprite = bs;
+					break;
+				}
 			}
-		}
-		if (!buttonSprite) return result;
-		GameObject* gameObject = nullptr;
-		for (auto node : CCArrayExt<CCNode*>(buttonSprite->getChildren())) {
-			if (auto go = typeinfo_cast<GameObject*>(node)) {
-				gameObject = go;
-				break;
+			if (!buttonSprite) return result;
+			GameObject* gameObject = nullptr;
+			for (auto node : CCArrayExt<CCNode*>(buttonSprite->getChildren())) {
+				if (auto go = typeinfo_cast<GameObject*>(node)) {
+					gameObject = go;
+					break;
+				}
 			}
+			if (!gameObject || gameObject->m_objectID != id) return result;
 		}
-		if (!gameObject) return result;
-		if (gameObject->m_objectID != id) return result;
 		std::string fontFile = "bigFont.fnt";
 		int font = MyEditorUI::getInt("stackSizeFont");
 		if (font == 0) {
