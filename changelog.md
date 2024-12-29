@@ -1,7 +1,6 @@
 # ObjectIDDisplay Changelog
 ## 1.0.4
-- Added `Extra Safety Mode`, which may save a few seconds in loading the level editor if disabled.
-- Rename settings to reflect new mod name.
+- Attempt to clean up the code.
 ## 1.0.3
 - Port to 2.2074.
 ## 1.0.2 (Note: was never published)

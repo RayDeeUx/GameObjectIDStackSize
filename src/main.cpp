@@ -3,62 +3,34 @@
 using namespace geode::prelude;
 
 class $modify(MyEditorUI, EditorUI) {
-	struct Fields {
-		Mod* mod = Mod::get();
-	};
-	static void onModify(auto& self) {
-		(void) self.setHookPriority("EditorUI::getCreateBtn", -2123456789);
-	}
-	bool getBool(std::string_view key) {
-		return m_fields->mod->getSettingValue<bool>(key);
-	}
-	int64_t getInt(std::string_view key) {
-		return m_fields->mod->getSettingValue<int64_t>(key);
-	}
-	double getDouble(std::string_view key) {
-		return m_fields->mod->getSettingValue<double>(key);
-	}
-	cocos2d::ccColor4B getColor(std::string_view key) {
-		return m_fields->mod->getSettingValue<cocos2d::ccColor4B>(key);
-	}
+	static void onModify(auto& self) { (void) self.setHookPriority("EditorUI::getCreateBtn", -2123456789); }
+	bool getBool(std::string_view key) { return Mod::get()->getSettingValue<bool>(key); }
+	int64_t getInt(std::string_view key) { return Mod::get()->getSettingValue<int64_t>(key); }
+	double getDouble(std::string_view key) { return Mod::get()->getSettingValue<double>(key); }
+	cocos2d::ccColor4B getColor(std::string_view key) { return Mod::get()->getSettingValue<cocos2d::ccColor4B>(key); }
 	CreateMenuItem* getCreateBtn(int id, int bg) {
 		auto result = EditorUI::getCreateBtn(id, bg);
 		if (!MyEditorUI::getBool("enabled")) return result;
-		if (MyEditorUI::getBool("extraSafety")) {
-			ButtonSprite* buttonSprite = nullptr;
-			for (auto node : CCArrayExt<CCNode*>(result->getChildren())) {
-				if (auto bs = typeinfo_cast<ButtonSprite*>(node)) {
-					buttonSprite = bs;
-					break;
-				}
-			}
-			if (!buttonSprite) return result;
-			GameObject* gameObject = nullptr;
-			for (auto node : CCArrayExt<CCNode*>(buttonSprite->getChildren())) {
-				if (auto go = typeinfo_cast<GameObject*>(node)) {
-					gameObject = go;
-					break;
-				}
-			}
-			if (!gameObject || gameObject->m_objectID != id) return result;
-		}
+		ButtonSprite* buttonSprite = result->getChildByType<ButtonSprite>(0);
+		if (!buttonSprite) return result;
+		GameObject* gameObject = buttonSprite->getChildByType<GameObject>(0);
+		if (!gameObject || gameObject->m_objectID != id) return result;
 		std::string fontFile = "bigFont.fnt";
 		int font = MyEditorUI::getInt("stackSizeFont");
-		if (font == 0) {
-			fontFile = "bigFont.fnt";
-		} else if (font == -1) {
+		if (font == -1) {
 			fontFile = "goldFont.fnt";
 		} else if (font == -2) {
 			fontFile = "chatFont.fnt";
 		} else if (font > 0) {
 			fontFile = fmt::format("gjFont{:02d}.fnt", font);
 		}
-		auto objectIDAsCString = fmt::format("{}", id);
-		auto label = CCLabelBMFont::create(objectIDAsCString.c_str(), fontFile.c_str(), 10.f, kCCTextAlignmentRight);
-		auto nodeID = fmt::format("{}/objectID-{}-stacksize", m_fields->mod->getID(), id);
+		auto label = CCLabelBMFont::create(fmt::format("{}", id).c_str(), fontFile.c_str());
+		auto nodeID = fmt::format("{}/objectID-{}-stacksize", Mod::get()->getID(), id);
 		auto color = MyEditorUI::getColor("color");
-		auto padding = static_cast<float>(MyEditorUI::getDouble("padding"));
-		if (MyEditorUI::getBool("readableMode")) label->setBlendFunc({GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA});
+		auto padding = static_cast<float>(getDouble("padding"));
+		if (MyEditorUI::getBool("readableMode") && font == -2)
+			label->setBlendFunc({GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA});
+		label->setAlignment(kCCTextAlignmentRight);
 		label->setAnchorPoint({1.f, 0.f});
 		label->setColor({color.r, color.g, color.b});
 		label->setOpacity(color.a);
