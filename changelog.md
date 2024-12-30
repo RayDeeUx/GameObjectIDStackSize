@@ -1,12 +1,15 @@
 # ObjectIDDisplay Changelog
-## 1.0.4
+## v1.0.4
 - Attempt to clean up the code.
-## 1.0.3
+- Attempt to optimize the code, with help from Alphalaneous.
+- Added `Extra Safety Mode` (enabled by default to keep current behavior).
+  - Disabling it might shave off anywhere from a few extra milliseconds to a few seconds, depending on your machine and on how many of your installed mods also rely on the same node for objects in the level editor. 
+## v1.0.3 (Note: was published on GitHub as `1.0.2`)
 - Port to 2.2074.
-## 1.0.2 (Note: was never published)
+## v1.0.2 (Note: was never published)
 - Fix a typo in the mod settings.
 - Rename the mod to `ObjectIDDisplay`.
-## 1.0.1
+## v1.0.1
 - Rename the mod to `GameObjectIDDisplay`.
-## 1.0.0
+## v1.0.0
 - Initial release (on GitHub).
