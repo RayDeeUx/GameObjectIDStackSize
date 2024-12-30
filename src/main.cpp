@@ -11,9 +11,9 @@ class $modify(MyEditorUI, EditorUI) {
 	CreateMenuItem* getCreateBtn(int id, int bg) {
 		auto result = EditorUI::getCreateBtn(id, bg);
 		if (!MyEditorUI::getBool("enabled")) return result;
-		ButtonSprite* buttonSprite = result->getChildByType<ButtonSprite>(0);
+		ButtonSprite* buttonSprite = getBool("extraSafety") ? result->getChildByType<ButtonSprite>(0) : typeinfo_cast<ButtonSprite*>(result->getChildren()->objectAtIndex(0));
 		if (!buttonSprite) return result;
-		GameObject* gameObject = buttonSprite->getChildByType<GameObject>(0);
+		GameObject* gameObject = getBool("extraSafety") ? buttonSprite->getChildByType<GameObject>(0) : typeinfo_cast<GameObject*>(buttonSprite->getChildren()->objectAtIndex(1));
 		if (!gameObject || gameObject->m_objectID != id) return result;
 		std::string fontFile = "bigFont.fnt";
 		int font = MyEditorUI::getInt("stackSizeFont");
